@@ -27,6 +27,46 @@
  *
  **/
 
-const person = {
-    id: 'xxxxsss',
-};
+const { addItem } = require("./exercise1");
+
+describe('Unit Test: Exercise 1', () => {
+    let obj = {
+        id: 'xxxxsss',
+    };
+
+    it('should not update array fi the secund or the first parameter be invalid', () => {
+       let array = [];
+       let obj = {};
+
+       addItem(null, array);
+       expect(array).toEqual([]);
+
+        addItem(obj);
+       expect(obj).toEqual({});
+       expect(array).toEqual([]);
+    });
+
+    it('must add a new object in the array', () => {
+        let array = [{id: 'sss'}];
+
+        addItem(obj, array);
+
+        expect(array.length).toEqual(2);
+    });
+
+    it('array must be equal', () => {
+        let array = [{id: 'xxxxsss'}];
+
+        addItem(obj, array);
+
+        expect(array.length).toEqual(1);
+    });
+
+    it('must add a new object in the array when the third parameter is true', () => {
+        let array = [{id: 'xxxxsss'}];
+
+        addItem(obj, array, true);
+
+        expect(array.length).toEqual(2);
+    });
+});
