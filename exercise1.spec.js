@@ -1,3 +1,4 @@
+
 /**
  * Make a function.
  * This function must receive an object of person as the first parameter,
@@ -26,7 +27,76 @@
  *
  *
  **/
+const { myFunction } = require('./myFunction');
 
-const person = {
-    id: 'xxxxsss',
-};
+describe( 'myArray Function Unit Test', () =>{
+    const myObject = {
+        id:'1',
+    };
+    let myArray;
+
+    beforeEach(function () {
+        myArray = [];
+    });
+
+    const myBoolean = true;
+
+    it('must return nothing when I pass nothing in 1st and 2nd parameter ', function () {
+
+        myFunction(myObject, null);
+        myFunction(null, myArray);
+        expect(myObject).toEqual({
+            id:'1',
+        });
+        expect(myArray).toEqual([]);
+
+    });
+
+    it( 'the function must add the object in the array', function () {
+       const newObject = {
+            id:'2',
+       };
+       myFunction(newObject, myArray);
+       expect(myArray.length).toEqual(1);
+    });
+
+    it( 'the function must not add a repeated object in the array', function () {
+        const newObject = {
+            id:'1',
+        };
+
+        myArray.push( {
+            id:'1',
+        });
+        myFunction(newObject, myArray);
+        expect(myArray.length).toEqual(1);
+    });
+
+    it( 'the function must add without validation when 3rd param is true', function () {
+        const newObject = {
+            id:'1',
+        };
+        myArray.push( {
+            id:'1',
+        });
+        myFunction(newObject, myArray, myBoolean);
+        expect(myArray.length).toEqual(2);
+        expect(myBoolean).toEqual(true);
+    });
+
+    it( 'the function must not add without validation when 3rd param is false', function () {
+        const newObject = {
+            id:'1',
+        };
+        myArray.push( {
+            id:'1',
+        });
+
+        myFunction(newObject, myArray, false);
+        expect(myArray.length).toEqual(1);
+
+    })
+
+})
+
+
